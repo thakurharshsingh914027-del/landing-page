@@ -1,0 +1,107 @@
+/* --- 1. DESIGN SYSTEM & VARIABLES --- */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+
+:root {
+    --primary-blue: #2563eb;
+    --primary-cyan: #06b6d4;
+    --slate-900: #0f172a;
+    --slate-600: #475569;
+    --slate-500: #64748b;
+    --glass-bg: rgba(255, 255, 255, 0.8);
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    scroll-behavior: smooth;
+}
+
+/* --- 2. THE FIX: COMPATIBLE GRADIENT TEXT --- */
+.gradient-text {
+    background: linear-gradient(90deg, var(--primary-blue), var(--primary-cyan));
+    -webkit-background-clip: text; /* Safari/Chrome */
+    background-clip: text;         /* Standard Property - FIXED ERROR */
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+/* --- 3. NAVIGATION & UI --- */
+
+/* Glassmorphism Navbar State (Triggered by JS) */
+.nav-scrolled {
+    background-color: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+}
+
+/* Social Media Icons */
+.social-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--slate-900);
+    display: flex;
+    align-items: center;      /* Vertically center icon */
+    justify-content: center;   /* Horizontally center icon */
+    color: var(--slate-500);
+    border: 1px solid #1e293b;
+    transition: var(--transition-smooth);
+}
+
+.social-icon:hover {
+    background: var(--primary-blue);
+    color: white;
+    transform: translateY(-3px);
+    border-color: var(--primary-blue);
+}
+
+/* --- 4. CORE ANIMATIONS --- */
+
+/* Floating Hero Effect */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Scroll Reveal: Initial State */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px) scale(0.98);
+    transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform, opacity; /* Optimizes GPU performance */
+}
+
+/* Scroll Reveal: Active State (Applied via JS) */
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Interaction: Card Lift */
+.hover-lift {
+    transition: var(--transition-smooth);
+}
+
+.hover-lift:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary-blue) !important;
+}
+
+/* Staggered Delay Helpers */
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+
+/* --- 5. FORM STYLING --- */
+#newsletterForm input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+    border-color: var(--primary-blue);
+}
